@@ -16,7 +16,7 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_AddLargeExperimentalCart_ReturnFalse()
         {
             ICartConstraint rule = new ExperimentalCartMaxSize();
-            Cart cart = new ExperimentalCart();
+            ExperimentalCart cart = new ExperimentalCart();
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Large, true), cart);
 
@@ -27,7 +27,7 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_AddMediumExperimentalCart_ReturnTrue()
         {
             ICartConstraint rule = new ExperimentalCartMaxSize();
-            Cart cart = new ExperimentalCart();
+            ExperimentalCart cart = new ExperimentalCart();
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, true), cart);
 

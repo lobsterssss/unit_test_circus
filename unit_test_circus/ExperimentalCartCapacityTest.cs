@@ -12,13 +12,11 @@ namespace CircusTrainUnitTests
     [TestClass]
     public sealed class ExperimentalCartCapacityTest
     {
-
-
         [TestMethod]
         public void CanAddAnimal_AddMediumToFullExperimentalCart_ReturnTrue()
         {
             ICartConstraint rule = new ExperimentalCartCapacity();
-            Cart cart = new ExperimentalCart();
+            ExperimentalCart cart = new ExperimentalCart();
             cart.AddAnimal(new Animal(Animal.Size.Small, false));
             cart.AddAnimal(new Animal(Animal.Size.Small, false));
 
@@ -31,7 +29,7 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_AddMediumToHalfFullExperimentalCart_ReturnFalse()
         {
             ICartConstraint rule = new ExperimentalCartCapacity();
-            Cart cart = new ExperimentalCart();
+            ExperimentalCart cart = new ExperimentalCart();
             cart.AddAnimal(new Animal(Animal.Size.Medium, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, true), cart);
