@@ -10,14 +10,14 @@ using CircusTrain.Carts;
 namespace CircusTrainUnitTests
 {
     [TestClass]
-    public sealed class CarnivoreSmallerThanSmallestAnimalTest
+    public sealed class CarnivoreSmallerThanSmallestAnimalTests
     {
         [TestMethod]
         public void CanAddAnimal_SmallCarnivoreSmallerThanMediumHerbivore_ReturnTrue()
         {
             ICartConstraint rule = new CarnivoreSmallerThanSmallestAnimal();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Medium, false));
+            Cart cart = new Cart([new CartCapacity(), new AnimalBiggerThanLargestCarnivore(), new CarnivoreSmallerThanSmallestAnimal()]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Medium, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Small, true), cart);
 
@@ -28,8 +28,8 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_LargeHerbivoreSmallerThanMediumHerbivore_ReturnTrue()
         {
             ICartConstraint rule = new CarnivoreSmallerThanSmallestAnimal();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Medium, false));
+            Cart cart = new Cart([new CartCapacity(), new AnimalBiggerThanLargestCarnivore(), new CarnivoreSmallerThanSmallestAnimal()]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Medium, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Large, false), cart);
 
@@ -40,8 +40,8 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_MediumCarnivoreSmallerThanSmallHerbivore_ReturnFalse()
         {
             ICartConstraint rule = new CarnivoreSmallerThanSmallestAnimal();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Small, false));
+            Cart cart = new Cart([new CartCapacity(), new AnimalBiggerThanLargestCarnivore(), new CarnivoreSmallerThanSmallestAnimal()]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Small, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, true), cart);
 

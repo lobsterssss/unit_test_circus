@@ -10,15 +10,15 @@ using CircusTrain.Carts;
 namespace CircusTrainUnitTests
 {
     [TestClass]
-    public sealed class CartCapacityTest
+    public sealed class CartCapacityTests
     {
         [TestMethod]
         public void CanAddAnimal_AddMediumToFullCart_ReturnFalse()
         {
             ICartConstraint rule = new CartCapacity();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Large, false));
-            cart.AddAnimal(new Animal(Animal.Size.Large, false));
+            Cart cart = new Cart([new CartCapacity(), new AnimalBiggerThanLargestCarnivore(), new CarnivoreSmallerThanSmallestAnimal()]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Large, false));
+            cart.TryToAddAnimal(new Animal(Animal.Size.Large, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, false), cart);
 
@@ -29,8 +29,8 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_AddMediumToHalfFullCart_ReturnTrue()
         {
             ICartConstraint rule = new CartCapacity();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Large, false));
+            Cart cart = new Cart([new CartCapacity(), new AnimalBiggerThanLargestCarnivore(), new CarnivoreSmallerThanSmallestAnimal()]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Large, false));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, true), cart);
 

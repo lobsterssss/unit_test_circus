@@ -7,30 +7,17 @@ namespace CircusTrainUnitTests
     using System.CodeDom;
 
     [TestClass]
-    public sealed class TrainTest
+    public sealed class CartTests
     {
         [TestMethod]
-        public void AddAnimal_2smallCarnivores_Return1Carts()
+        public void AddAnimals_2smallCarnivores_Return2Carts()
         {
             Train train = new Train();
             List<Animal> animals = CreateMultipleAnimals(0, 0, 0, 2, 0, 0);
 
-            animals = train.AddAnimal(animals);
+            train.AddAnimals(animals);
 
-            Assert.AreEqual(1, train.GetCount(), $"train building unsuccessfull ");
-            Assert.AreEqual(1, animals.Count(), $"train building unsuccessfull ");
-        }
-
-        [TestMethod]
-        public void AddAnimal_2smallCarnivores_Return2Carts()
-        {
-            Train train = new Train();
-            List<Animal> animals = CreateMultipleAnimals(0, 0, 0, 2, 0, 0);
-            animals = train.AddAnimal(animals);
-
-            animals = train.AddAnimal(animals);
-
-            Assert.AreEqual(2, train.GetCount(), $"train building unsuccessfull ");
+            Assert.AreEqual(2, train.GetCartCount(), $"train building unsuccessfull ");
             Assert.AreEqual(0, animals.Count(), $"train building unsuccessfull ");
         }
 
@@ -39,12 +26,11 @@ namespace CircusTrainUnitTests
         {
             Train train = new Train();
             List<Animal> animals = CreateMultipleAnimals(0, 0, 0, 2, 0, 0);
-            animals = train.AddAnimal(animals);
-            animals = train.AddAnimal(animals);
+            train.AddAnimals(animals);
 
             train.AddExperimental();
 
-            Assert.AreEqual(1, train.GetCount(), $"train building unsuccessfull ");
+            Assert.AreEqual(1, train.GetCartCount(), $"train building unsuccessfull ");
             Assert.AreEqual(0, animals.Count(), $"train building unsuccessfull ");
         }
 

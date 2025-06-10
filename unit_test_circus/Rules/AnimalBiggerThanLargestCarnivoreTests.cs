@@ -10,15 +10,15 @@ using CircusTrain.Carts;
 namespace CircusTrainUnitTests
 {
     [TestClass]
-    public sealed class AnimalBiggerThanLargestCarnivoreTest
+    public sealed class AnimalBiggerThanLargestCarnivoreTests
     {
 
         [TestMethod]
         public void CanAddAnimal_LargeHerbivoreBiggerThanMediumCarnivore_ReturnTrue()
         {
             ICartConstraint rule = new AnimalBiggerThanLargestCarnivore();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Medium, true));
+            Cart cart = new Cart([rule]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Medium, true));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Large, false), cart);
 
@@ -29,8 +29,8 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_SmallHerbivoreBiggerThanMediumCarnivore_ReturnFalse()
         {
             ICartConstraint rule = new AnimalBiggerThanLargestCarnivore();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Medium, true));
+            Cart cart = new Cart([rule]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Medium, true));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Small, false), cart);
 
@@ -41,8 +41,8 @@ namespace CircusTrainUnitTests
         public void CanAddAnimal_MediumCarnivoreBiggerThanMediumCarnivore_ReturnFalse()
         {
             ICartConstraint rule = new AnimalBiggerThanLargestCarnivore();
-            Cart cart = new Cart();
-            cart.AddAnimal(new Animal(Animal.Size.Medium, true));
+            Cart cart = new Cart([rule]);
+            cart.TryToAddAnimal(new Animal(Animal.Size.Medium, true));
 
             bool result = rule.CanAddAnimal(new Animal(Animal.Size.Medium, true), cart);
 
